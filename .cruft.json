@@ -1,0 +1,17 @@
+{
+  "template": "https://github.com/foobarapps/scaffold-template",
+  "commit": "1bfd97145da071ed7284ce4a3580e1afbb1aef43",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "Chatbot",
+      "project_slug": "chatbot",
+      "_copy_without_render": [
+        ".github/workflows/ci.yml",
+        "scripts/docker-stack-wait.sh"
+      ],
+      "_template": "https://github.com/foobarapps/scaffold-template"
+    }
+  },
+  "directory": null
+}
