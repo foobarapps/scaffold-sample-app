@@ -16,6 +16,9 @@ services:
       - --accesslog.format=json
     networks:
       - web
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     deploy:
       placement:
         constraints:
@@ -80,4 +83,4 @@ services:
 
 networks:
   web:
-    external: true
+    driver: overlay

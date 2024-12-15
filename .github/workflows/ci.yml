@@ -129,7 +129,6 @@ jobs:
         run: |
           STACK_NAME=$(basename "$PWD")
           export DOCKER_HOST="ssh://ubuntu@${SERVER_IP_ADDRESS}"
-          docker network create --driver=overlay web || true
           docker stack deploy --with-registry-auth -c compose.yml -c compose.prod.yml $STACK_NAME
           # Since Docker 26, `docker stack deploy` has a `--detach=false` option which waits until all the services are updated and healthy.
           # However, it successfully returns 0 even if one of the services is rolled back.
