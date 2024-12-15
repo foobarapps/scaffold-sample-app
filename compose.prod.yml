@@ -14,6 +14,8 @@ services:
       - --entrypoints.websecure.address=:443
       - --accesslog=true
       - --accesslog.format=json
+    networks:
+      - web
     deploy:
       placement:
         constraints:
@@ -37,6 +39,8 @@ services:
         - traefik.http.middlewares.traefik-compress.compress=true
 
   app:
+    networks:
+      - web
     deploy:
       replicas: 1
       update_config:
@@ -74,3 +78,6 @@ services:
       update_config:
         order: start-first
 
+networks:
+  web:
+    driver: overlay
