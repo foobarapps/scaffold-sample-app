@@ -3,19 +3,10 @@ name = "app"
 version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "scaffold-framework>=0.4.0",
-]
+dependencies = ["humanize>=4.11.0", "scaffold-framework>=0.5.1"]
 
 [dependency-groups]
-dev = [
-    "black",
-    "djlint",
-    "import-linter",
-    "mypy",
-    "pytest",
-    "ruff",
-]
+dev = ["black", "djlint", "import-linter", "mypy", "pytest", "ruff"]
 
 [tool.mypy]
 disable_error_code = "import-untyped"
@@ -48,13 +39,7 @@ extend-select = [
     "I",
     "UP",
 ]
-extend-ignore = [
-    "A002",
-    "ANN101",
-    "ANN102",
-    "B010",
-    "S101",
-]
+extend-ignore = ["A002", "ANN101", "ANN102", "B010", "S101"]
 
 [tool.importlinter]
 root_package = "app"
@@ -62,44 +47,28 @@ root_package = "app"
 [[tool.importlinter.contracts]]
 name = "Domain Layer"
 type = "forbidden"
-source_modules = [
-    "app.domain"
-]
+source_modules = ["app.domain"]
 forbidden_modules = [
     "app.application",
     "app.infrastructure",
-    "app.presentation"
+    "app.presentation",
 ]
 
 [[tool.importlinter.contracts]]
 name = "Application Layer"
 type = "forbidden"
-source_modules = [
-    "app.application"
-]
-forbidden_modules = [
-    "app.infrastructure",
-    "app.presentation"
-]
+source_modules = ["app.application"]
+forbidden_modules = ["app.infrastructure", "app.presentation"]
 
 [[tool.importlinter.contracts]]
 name = "Infrastructure Layer"
 type = "forbidden"
-source_modules = [
-    "app.infrastructure"
-]
-forbidden_modules = [
-    "app.presentation"
-]
+source_modules = ["app.infrastructure"]
+forbidden_modules = ["app.presentation"]
 
 [[tool.importlinter.contracts]]
 name = "Presentation Layer"
 type = "forbidden"
-source_modules = [
-    "app.presentation"
-]
-forbidden_modules = [
-    "app.domain",
-    "app.infrastructure",
-]
+source_modules = ["app.presentation"]
+forbidden_modules = ["app.domain", "app.infrastructure"]
 allow_indirect_imports = true

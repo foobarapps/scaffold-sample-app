@@ -18,6 +18,8 @@ from app.application.interfaces import (
 )
 from app.application.interfaces.task_queue import Task, TaskHandler
 from app.application.interfaces.uow import UnitOfWorkFactory
+from app.domain.chatbot import Chatbot
+from app.infrastructure.services.chatbot import Echobot
 from app.infrastructure.services.emailnotificationservice import (
     EmailNotificationService,
 )
@@ -43,7 +45,10 @@ def web_app_factory(container: Container) -> WebApp:
 
 
 def task_queue_factory(container: Container) -> TaskQueue:
-    task_queue: TaskQueue = PostgresTaskQueue[Task, TaskHandler](connection_pool=container[AsyncConnectionPool])
+    task_queue: TaskQueue = PostgresTaskQueue[Task, TaskHandler](
+        connection_pool=container[AsyncConnectionPool],
+        schema_name="scaffold",
+    )
 
     task_handler_classes = find_subclasses(handlers_pkg, BaseTaskHandler)
 
@@ -65,6 +70,8 @@ def bootstrap() -> Container:
     container.add_singleton(PubSubService, lambda c: PostgresPubSubService(connection_pool=c[AsyncConnectionPool]))
     container.add_singleton(TaskQueue, task_queue_factory)
 
+    container.add_transient(Chatbot, Echobot)
+
     async def init_services(c: Container) -> None:
         await c[TaskQueue].init()
         await c[PubSubService].init()
@@ -82,12 +89,11 @@ def bootstrap() -> Container:
                 username=os.getenv("MAIL_USERNAME"),
                 password=os.getenv("MAIL_PASSWORD"),
             )
-            email_notification_service = EmailNotificationService(
+            return EmailNotificationService(
                 web_app=container[WebApp],
                 mail_sender=mail_sender,
                 default_sender_email=os.environ["MAIL_DEFAULT_SENDER"],
             )
-            return email_notification_service
 
         container.add_transient(NotificationService, email_notification_service_factory)
 

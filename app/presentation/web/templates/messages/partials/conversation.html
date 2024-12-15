@@ -1,0 +1,20 @@
+<div class="chat__messages" id="chat-messages" hx-swap-oob="afterbegin">
+  {% for message in messages %}
+    <div class="message {{ "message--sent" if not message.is_from_bot else "message--received" }}">
+      <div class="message__content">
+        <div class="message__bubble">{{ message.content }}</div>
+        <div class="message__time">{{ message.sent_at | time_ago }}</div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+<form class="chat__form" id="chat-form" ws-send hx-swap-oob="true">
+  <div class="chat__input-container">
+    <input autofocus
+           name="content"
+           class="chat__input"
+           type="text"
+           placeholder="Type your message...">
+    <button type="submit" class="chat__submit">Send</button>
+  </div>
+</form>

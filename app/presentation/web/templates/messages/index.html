@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="chat" hx-ext="ws" ws-connect="{{ url_for('.websockets') }}">
+    {% include "messages/partials/conversation.html" %}
+  </div>
+{% endblock content %}

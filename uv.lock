@@ -60,6 +60,7 @@ name = "app"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "humanize" },
     { name = "scaffold-framework" },
 ]
 
@@ -74,7 +75,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "scaffold-framework", specifier = ">=0.4.0" }]
+requires-dist = [
+    { name = "humanize", specifier = ">=4.11.0" },
+    { name = "scaffold-framework", specifier = ">=0.5.1" },
+]
 
 [package.metadata.requires-dev]
 dev = [
@@ -368,6 +372,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/3e/9b/fda93fb4d957db19b0f6b370e79d586b3e8528b20252c729c476a2c02954/hpack-4.0.0.tar.gz", hash = "sha256:fc41de0c63e687ebffde81187a948221294896f6bdc0ae2312708df339430095", size = 49117 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d5/34/e8b383f35b77c402d28563d2b8f83159319b509bc5f760b15d60b0abf165/hpack-4.0.0-py3-none-any.whl", hash = "sha256:84a076fad3dc9a9f8063ccb8041ef100867b1878b25ef0ee63847a5d53818a6c", size = 32611 },
+]
+
+[[package]]
+name = "humanize"
+version = "4.11.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/6a/40/64a912b9330786df25e58127194d4a5a7441f818b400b155e748a270f924/humanize-4.11.0.tar.gz", hash = "sha256:e66f36020a2d5a974c504bd2555cf770621dbdbb6d82f94a6857c0b1ea2608be", size = 80374 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/92/75/4bc3e242ad13f2e6c12e0b0401ab2c5e5c6f0d7da37ec69bc808e24e0ccb/humanize-4.11.0-py3-none-any.whl", hash = "sha256:b53caaec8532bcb2fff70c8826f904c35943f8cecaca29d272d9df38092736c0", size = 128055 },
 ]
 
 [[package]]
@@ -843,7 +856,7 @@ wheels = [
 
 [[package]]
 name = "scaffold-framework"
-version = "0.4.0"
+version = "0.5.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosmtplib" },
@@ -858,9 +871,9 @@ dependencies = [
     { name = "wsproto" },
     { name = "wtforms" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a7/0a/64b998d5b040b43afb59ade134a3fda28813b3ca4530f38c1be36d1a0ff4/scaffold_framework-0.4.0.tar.gz", hash = "sha256:ba40f08d08985dfd12543097d881b65b7a6a9fd69400e9ef5cac249e4343ffc1", size = 19024 }
+sdist = { url = "https://files.pythonhosted.org/packages/89/bc/d907bbb6791a324ab5cb32c77d45ce471ebe0cb022f53152a1512c50b3a5/scaffold_framework-0.5.1.tar.gz", hash = "sha256:e8cd13ccbc1b6a497cfd176d5d00d2b5c22c9d6add72366cd1592d271508019a", size = 19254 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9b/57/2cdd106cbe28962e6818120701841c3a56e05aa6a4eebb9e4ec376cbd67f/scaffold_framework-0.4.0-py3-none-any.whl", hash = "sha256:e2a7e2e855c42e2620ee6d5a248266f1f19426999e78f61c3b5f94a797a719b1", size = 24348 },
+    { url = "https://files.pythonhosted.org/packages/63/20/0a894b096c88e584965bdbd88737924ec3be52b524a82ee6701378b3e678/scaffold_framework-0.5.1-py3-none-any.whl", hash = "sha256:f7c8f91b3eb6e9e349a4d00e4c9d21190b407ba79b395b1b4bea6297685b5154", size = 24799 },
 ]
 
 [[package]]

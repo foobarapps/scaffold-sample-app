@@ -23,13 +23,20 @@ services:
     depends_on:
       proxy:
         condition: service_started
+      worker:
+        condition: service_started
       db:
         condition: service_healthy
-      worker:
+      mailhog:
         condition: service_started
 
   worker:
     <<: *default
+    depends_on:
+      db:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
 
   cron:
     command: "true"

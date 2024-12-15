@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="start-chat">
+    <h1 class="start-chat__title">Start a chat</h1>
+    <form class="start-chat__form"
+          method="post"
+          action="{{ url_for('.create') }}">
+      {{ form.email(class="start-chat__input", placeholder="Enter your email") }}
+      {{ form.csrf_token }}
+      <button type="submit" class="start-chat__submit">Start Chat</button>
+    </form>
+  </div>
+{% endblock content %}
