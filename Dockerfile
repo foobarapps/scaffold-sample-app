@@ -21,6 +21,7 @@ ARG USERNAME=user
 RUN getent group $GROUP_ID || addgroup --gid $GROUP_ID $USERNAME
 RUN id $USER_ID >/dev/null 2>&1 || adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID $USERNAME
 
+RUN mkdir -p /app
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
