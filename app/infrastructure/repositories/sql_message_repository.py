@@ -20,7 +20,7 @@ class SqlMessageRepository(GenericSqlRepository[Message, MessageId, MessageDTO],
     async def get_user_messages(self, user_id: UserId) -> Sequence[Message]:
         dtos = (
             await self._session.scalars(
-                sa.select(MessageDTO).where(MessageDTO.user_id == user_id.value).order_by(MessageDTO.sent_at.desc())
+                sa.select(MessageDTO).where(MessageDTO.user_id == user_id.value).order_by(MessageDTO.sent_at.desc()),
             )
         ).all()
         return [self.map_dto_to_entity_and_track(dto) for dto in dtos]
@@ -44,10 +44,9 @@ class SqlMessageRepository(GenericSqlRepository[Message, MessageId, MessageDTO],
                 content=dto.content,
                 sent_at=dto.sent_at,
             )
-        else:
-            return UserMessage(
-                id=MessageId(dto.id),
-                user_id=UserId(dto.user_id),
-                content=dto.content,
-                sent_at=dto.sent_at,
-            )
+        return UserMessage(
+            id=MessageId(dto.id),
+            user_id=UserId(dto.user_id),
+            content=dto.content,
+            sent_at=dto.sent_at,
+        )
