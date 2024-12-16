@@ -10,7 +10,7 @@ from scaffold.web.base_controller import BaseController
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 from app.application.backgroundtasks import handlers as handlers_pkg
-from app.application.backgroundtasks.handlers.base import BaseTaskHandler
+from app.application.backgroundtasks.handlers.base import GenericBaseTaskHandler
 from app.application.interfaces import (
     NotificationService,
     PubSubService,
@@ -50,7 +50,7 @@ def task_queue_factory(container: Container) -> TaskQueue:
         schema_name="scaffold",
     )
 
-    task_handler_classes = find_subclasses(handlers_pkg, BaseTaskHandler)
+    task_handler_classes = find_subclasses(handlers_pkg, GenericBaseTaskHandler)
 
     for task_handler_class in task_handler_classes:
         task_class: type[Task] = task_handler_class.get_task_type()

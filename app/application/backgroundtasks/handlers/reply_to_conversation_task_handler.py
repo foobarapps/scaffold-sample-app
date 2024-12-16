@@ -3,10 +3,10 @@ from typing import override
 from app.application.services.message_service import MessageService
 
 from ..tasks.reply_to_conversation_task import ReplyToConversationTask
-from .base import BaseTaskHandler
+from .base import GenericBaseTaskHandler
 
 
-class ReplyToConversationTaskHandler(BaseTaskHandler[ReplyToConversationTask]):
+class ReplyToConversationTaskHandler(GenericBaseTaskHandler[ReplyToConversationTask]):
     def __init__(
         self,
         message_service: MessageService,
