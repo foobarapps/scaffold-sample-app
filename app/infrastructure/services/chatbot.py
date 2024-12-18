@@ -3,6 +3,7 @@ from collections.abc import Sequence
 from typing import override
 
 from openai import AsyncOpenAI
+from openai.types.chat import ChatCompletionMessageParam
 from scaffold.uuid7 import uuid7
 
 from app.domain.chatbot import Chatbot
@@ -29,12 +30,16 @@ class OpenAIBot(Chatbot):
     async def reply_to_conversation(self, conversation: Sequence[Message]) -> BotMessage:
         latest_message = conversation[0]
 
+        completion_messages: list[ChatCompletionMessageParam] = []
+        for message in reversed(conversation):
+            if isinstance(message, UserMessage):
+                completion_messages.append({"role": "user", "content": message.content})
+            else:
+                completion_messages.append({"role": "assistant", "content": message.content})
+
         completion = await self.client.chat.completions.create(
             model="gpt-4o",
-            messages=[
-                {"role": "user" if isinstance(m, UserMessage) else "assistant", "content": m.content}  # type: ignore[misc]
-                for m in reversed(conversation)
-            ],
+            messages=completion_messages,
         )
 
         return BotMessage(
