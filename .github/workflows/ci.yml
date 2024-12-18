@@ -123,7 +123,7 @@ jobs:
           MAIL_DEFAULT_SENDER: ${{ vars.MAIL_DEFAULT_SENDER }}
           MAIL_HOSTNAME: ${{ vars.MAIL_HOSTNAME }}
           MAIL_PORT: ${{ vars.MAIL_PORT }}
-          MAIL_USERNAME: ${{ vars.MAIL_USERNAME }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           ACME_EMAIL: ${{ vars.ACME_EMAIL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
