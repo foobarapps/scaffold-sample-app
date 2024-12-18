@@ -5,11 +5,15 @@ from collections.abc import Sequence
 from typing import override
 
 from .base import Entity, EntityId
-from .user import UserId
 
 
 @dataclasses.dataclass(frozen=True)
 class MessageId(EntityId):
+    pass
+
+
+@dataclasses.dataclass(frozen=True)
+class UserId(EntityId):
     pass
 
 

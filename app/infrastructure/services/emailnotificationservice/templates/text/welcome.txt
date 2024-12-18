@@ -1,1 +1,1 @@
-Welcome to {{ url_for("users.index") }}!
+Welcome to {{ url_for("home.index") }}!

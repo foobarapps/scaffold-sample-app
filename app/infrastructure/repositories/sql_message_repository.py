@@ -9,9 +9,9 @@ from app.domain.message import (
     Message,
     MessageId,
     MessageRepository,
+    UserId,
     UserMessage,
 )
-from app.domain.user import UserId
 from app.infrastructure.persistence_model import Message as MessageDTO
 
 

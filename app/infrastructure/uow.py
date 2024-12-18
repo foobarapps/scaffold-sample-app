@@ -5,7 +5,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.application.interfaces.uow import UnitOfWork, UnitOfWorkFactory
 from app.infrastructure.repositories.sql_message_repository import SqlMessageRepository
-from app.infrastructure.repositories.sql_user_repository import SqlUserRepository
 
 
 class SqlUnitOfWork(GenericSqlUnitOfWork, UnitOfWork):
@@ -13,7 +12,6 @@ class SqlUnitOfWork(GenericSqlUnitOfWork, UnitOfWork):
     def __init__(self, session: AsyncSession) -> None:
         super().__init__(session)
 
-        self.users = SqlUserRepository(session)
         self.messages = SqlMessageRepository(session)
 
 

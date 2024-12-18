@@ -7,8 +7,8 @@ from app.application.services.user_service import UserService
 from app.presentation.web.forms import SignUpForm
 
 
-@controller(name="users")
-class UsersController(BaseController):
+@controller(name="home")
+class HomeController(BaseController):
     def __init__(
         self,
         user_service: UserService,
@@ -21,7 +21,7 @@ class UsersController(BaseController):
             return self.redirect(self.url_for("messages.index"))
 
         form = SignUpForm()
-        return await self.render_template("users/index.html", form=form)
+        return await self.render_template("home/index.html", form=form)
 
     @route("/", methods=["POST"])
     async def create(self) -> ResponseReturnValue:
@@ -29,8 +29,8 @@ class UsersController(BaseController):
 
         if form.validate():
             user_id = uuid.uuid4()
-            await self.user_service.sign_up_user(user_id=user_id, email=form.email.data)
+            await self.user_service.send_welcome_message(email=form.email.data)
             self.session["user_id"] = user_id
             return self.redirect(self.url_for(".index"))
 
-        return await self.render_template("users/index.html", form=form)
+        return await self.render_template("home/index.html", form=form)

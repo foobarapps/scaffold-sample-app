@@ -10,6 +10,7 @@ x-default: &default
     - MAIL_PORT
     - MAIL_DEFAULT_SENDER
     - ACME_EMAIL
+    - OPENAI_API_KEY
 
 services:
   proxy:

@@ -1,5 +1,6 @@
 import os
 
+from openai import AsyncOpenAI
 from psycopg_pool import AsyncConnectionPool
 from scaffold.di import Container
 from scaffold.mail_sender import SmtpMailSender
@@ -21,7 +22,7 @@ from app.application.interfaces import (
 )
 from app.application.interfaces.task_queue import Task, TaskHandler
 from app.domain.chatbot import Chatbot
-from app.infrastructure.services.chatbot import Echobot
+from app.infrastructure.services.chatbot import OpenAIBot
 from app.infrastructure.services.emailnotificationservice import (
     EmailNotificationService,
 )
@@ -73,7 +74,7 @@ def bootstrap() -> Container:
     container.add_singleton(TaskQueue, task_queue_factory)
     container.add_singleton(TaskManager, QuartTaskManager)
 
-    container.add_transient(Chatbot, Echobot)
+    container.add_transient(Chatbot, lambda _: OpenAIBot(client=AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"])))
 
     async def init_services(c: Container) -> None:
         await c[TaskQueue].init()

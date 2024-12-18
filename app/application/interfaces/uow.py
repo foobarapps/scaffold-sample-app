@@ -2,12 +2,10 @@ import abc
 from types import TracebackType
 
 from app.domain.message import MessageRepository
-from app.domain.user import UserRepository
 
 
 class UnitOfWork(abc.ABC):
     messages: MessageRepository
-    users: UserRepository
 
     @abc.abstractmethod
     async def commit(self) -> None:

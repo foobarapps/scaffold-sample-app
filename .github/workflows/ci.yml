@@ -126,6 +126,7 @@ jobs:
           MAIL_USERNAME: ${{ vars.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           ACME_EMAIL: ${{ vars.ACME_EMAIL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           STACK_NAME=$(basename "$PWD")
           export DOCKER_HOST="ssh://ubuntu@${SERVER_IP_ADDRESS}"

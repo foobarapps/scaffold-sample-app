@@ -66,7 +66,7 @@ class MessageService:
         async with uow:
             messages = await uow.messages.get_user_messages(UserId(user_id))
 
-            reply = self.chatbot.reply_to_conversation(messages)
+            reply = await self.chatbot.reply_to_conversation(messages)
 
             uow.messages.add(reply)
             await uow.commit()

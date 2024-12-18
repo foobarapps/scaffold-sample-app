@@ -27,7 +27,7 @@ class MessagesController(BaseController):
 
     @error_handler(Unauthorized)
     def handle_unauthorized(self, exception: Unauthorized) -> ResponseReturnValue:
-        return self.redirect(self.url_for("users.index"))
+        return self.redirect(self.url_for("home.index"))
 
     @route("/")
     @login_required
