@@ -4,6 +4,7 @@ from psycopg_pool import AsyncConnectionPool
 from scaffold.di import Container
 from scaffold.mail_sender import SmtpMailSender
 from scaffold.pub_sub import PostgresPubSubService
+from scaffold.task_manager import QuartTaskManager
 from scaffold.task_queue import PostgresTaskQueue
 from scaffold.utils import find_subclasses, get_env_flag, get_postgresql_url
 from scaffold.web.base_controller import BaseController
@@ -14,10 +15,11 @@ from app.application.backgroundtasks.handlers.base import GenericBaseTaskHandler
 from app.application.interfaces import (
     NotificationService,
     PubSubService,
+    TaskManager,
     TaskQueue,
+    UnitOfWorkFactory,
 )
 from app.application.interfaces.task_queue import Task, TaskHandler
-from app.application.interfaces.uow import UnitOfWorkFactory
 from app.domain.chatbot import Chatbot
 from app.infrastructure.services.chatbot import Echobot
 from app.infrastructure.services.emailnotificationservice import (
@@ -69,6 +71,7 @@ def bootstrap() -> Container:
     container.add_singleton(UnitOfWorkFactory, lambda _: SqlUnitOfWorkFactory(session_factory))
     container.add_singleton(PubSubService, lambda c: PostgresPubSubService(connection_pool=c[AsyncConnectionPool]))
     container.add_singleton(TaskQueue, task_queue_factory)
+    container.add_singleton(TaskManager, QuartTaskManager)
 
     container.add_transient(Chatbot, Echobot)
 
