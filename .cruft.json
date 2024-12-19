@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/foobarapps/scaffold-template",
-  "commit": "900feb5b23188951f662356ccfc0057d63bf7663",
+  "commit": "9fc8a08c7b1a02089862fd1ada093d26f4d7059c",
   "checkout": null,
   "context": {
     "cookiecutter": {
